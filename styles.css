@@ -7,7 +7,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Header */
 .hero {
   padding: 60px 20px 20px;
 }
@@ -17,7 +16,6 @@ body {
   color: black;
 }
 
-/* Animated Heading */
 .animated-heading {
   font-size: 2.8rem;
   background: linear-gradient(to right, #ff0080, #7928ca);
@@ -30,16 +28,9 @@ body {
   display: inline-block;
 }
 
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
+@keyframes typewriter { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
 
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-/* CTA */
 .cta {
   background: #fff;
   border: none;
@@ -51,18 +42,15 @@ body {
 }
 .cta:hover { transform: scale(1.1); }
 
-/* Modal */
 .modal {
   position: fixed;
   top:0; left:0;
   width:100%; height:100%;
-  display:flex;
-  align-items:center; justify-content:center;
+  display:flex; align-items:center; justify-content:center;
   background: rgba(0,0,0,0.6);
   z-index:100;
 }
 .modal.hidden { display:none; }
-
 .modal-content {
   background:#fff;
   padding:20px 30px;
@@ -95,28 +83,24 @@ body {
   background:#ffc0cb;
   border-radius:10px;
   border:3px solid black;
+  overflow: hidden;
 }
 
-/* Plane */
 #plane {
   position:absolute;
   bottom:10px;
   left:20px;
   font-size:2rem;
   cursor:grab;
+  transition: left 0.5s ease, top 0.5s ease; /* snapping animation */
 }
-.drag-label {
-  font-size:0.7rem;
-  color:red;
-}
+.drag-label { font-size:0.7rem; color:red; }
 
-/* SF Circle */
 #sf-circle {
   position:absolute;
   top:50px;
   right:50px;
-  width:50px;
-  height:50px;
+  width:50px; height:50px;
   border-radius:50%;
   background:red;
   color:white;
@@ -124,7 +108,6 @@ body {
   font-weight:bold;
 }
 
-/* See you text */
 #see-you {
   margin-top:20px;
   font-size:1.5rem;
@@ -132,7 +115,6 @@ body {
 }
 .hidden { display:none; }
 
-/* Floating Hearts & Pandas */
 .heart, .panda {
   position: fixed;
   top: -2rem;
@@ -141,13 +123,8 @@ body {
   animation: floatUp linear forwards;
   z-index:50;
 }
+@keyframes floatUp { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(110vh); opacity:0; } }
 
-@keyframes floatUp {
-  0% { transform: translateY(0); opacity:1; }
-  100% { transform: translateY(110vh); opacity:0; }
-}
-
-/* Confetti */
 .confetti {
   position:absolute;
   top:0;
@@ -156,28 +133,21 @@ body {
   z-index:1000;
 }
 
-/* Slider Section */
 #love-slider-section {
   margin-top:40px;
   padding:20px;
   background:pink;
   border-top:3px solid black;
 }
-
 #love-slider {
   width:80%;
   margin:15px 0;
   cursor:pointer;
   accent-color:red;
 }
-
 #love-slider-message {
   font-size:1.2rem;
   font-weight:bold;
   animation: bounce 1s infinite alternate;
 }
-
-@keyframes bounce {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-10px); }
-}
+@keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }

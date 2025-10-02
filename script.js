@@ -32,35 +32,20 @@ closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
 // Plane Drag Game
 const planeEl = document.getElementById("plane");
-const mapEl = document.getElementById("map-section");
+const mapContainer = document.getElementById("map-container");
 const seeYouEl = document.getElementById("see-you");
-
-// NJ and SF coordinates in pixels for plane drag detection
-const njCoords = { x: 650, y: 150 };
-const sfCoords = { x: 150, y: 250 }; // approximate on map container
 
 let isDragging = false;
 planeEl.addEventListener("mousedown", () => {
   isDragging = true;
   planeEl.style.cursor = "grabbing";
 });
-document.addEventListener("mouseup", () => {
-  if (isDragging) {
-    isDragging = false;
-    planeEl.style.cursor = "grab";
-    const rect = planeEl.getBoundingClientRect();
-    if (Math.abs(rect.left - sfCoords.x) < 50 && Math.abs(rect.top - sfCoords.y) < 50) {
-      confettiEffect();
-      seeYouEl.classList.remove("hidden");
-    }
-  }
-});
+document.addEventListener("mouseup", () => { isDragging = false; planeEl.style.cursor = "grab"; });
 document.addEventListener("mousemove", (e) => {
-  if (isDragging) {
-    const rect = mapEl.getBoundingClientRect();
-    planeEl.style.left = (e.clientX - rect.left - 20) + "px";
-    planeEl.style.top = (e.clientY - rect.top - 20) + "px";
-  }
+  if (!isDragging) return;
+  const rect = mapContainer.getBoundingClientRect();
+  planeEl.style.left = (e.clientX - rect.left - 20) + "px";
+  planeEl.style.top = (e.clientY - rect.top - 20) + "px";
 });
 
 // Confetti Effect
@@ -76,15 +61,17 @@ function confettiEffect() {
   }
 }
 
-// =======================
-// Leaflet Map
-// =======================
-const map = L.map('map').setView([39.8283, -98.5795], 4); // center US
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
+// Slider Game
+const slider = document.getElementById("love-slider");
+const message = document.getElementById("love-slider-message");
+const universe = document.getElementById("universe-image");
 
-// NJ Marker
-L.marker([40.0583, -74.4057]).addTo(map).bindPopup('New Jersey').openPopup();
-// SF Marker
-L.marker([37.7749, -122.4194]).addTo(map).bindPopup('San Francisco').openPopup();
+slider.addEventListener("input", () => {
+  if (parseInt(slider.value) >= 100) {
+    message.textContent = "MORE THAN THE UNIVERSE";
+    universe.classList.remove("hidden");
+  } else {
+    message.textContent = "NOT YET KEEP GOING HIGHER";
+    universe.classList.add("hidden");
+  }
+});

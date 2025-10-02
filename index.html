@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>happy boyfriend day — aaru bebe</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -20,14 +17,14 @@
   </header>
 
   <!-- Button to open love letter -->
-  <button id="open-letter" class="cta" aria-haspopup="dialog" aria-controls="modal">Open Letter</button>
+  <button id="open-letter" class="cta">Open Letter</button>
 
   <!-- Modal for the letter -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div id="modal" class="modal hidden">
     <div class="modal-content">
-      <button id="close-modal" class="close" aria-label="Close letter">×</button>
-      <h2 id="modal-title">A Letter for you</h2>
-      <p id="letter">
+      <button id="close-modal" class="close">×</button>
+      <h2>A Letter for you</h2>
+      <p>
         i love u jaanu. i'm not good at this at all but i'm learning so i can give my love the proper appreciation and love you deserve. 
         you make me so happy my dudu. ur right, we will work it out we will figure it out but i want u to know that to me u are everything and more. 
         i'm so excited to see you. hope u enjoyed this!!<br><br>
@@ -40,7 +37,8 @@
   <section id="map-section">
     <h2 class="map-title">our journey ❤️</h2>
     <div id="map-container">
-      <img id="us-map" src="map-image.png" alt="US Map" />
+      <!-- Use a direct image URL for map -->
+      <img id="us-map" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/USA_map_blank.svg/800px-USA_map_blank.svg.png" alt="US Map" />
       <!-- Plane -->
       <div id="plane">
         ✈️
@@ -55,10 +53,10 @@
     <h2>How much do I love you?</h2>
     <input type="range" min="0" max="100" value="0" id="love-slider">
     <p id="love-slider-message">NOT YET KEEP GOING HIGHER</p>
-    <img id="universe-image" src="universe.jpg" alt="Universe" class="hidden"/>
+    <!-- Use a direct image URL for universe -->
+    <img id="universe-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Hubble_Ultra_Deep_Field_part_d.jpg" alt="Universe" class="hidden"/>
   </section>
 
-  <!-- Script -->
   <script src="script.js" defer></script>
 </body>
 </html>

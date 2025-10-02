@@ -32,60 +32,53 @@ closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
 // Plane Drag Game
 const planeEl = document.getElementById("plane");
-const mapContainer = document.getElementById("map-container");
+const journey = document.getElementById("journey-container");
+const sfCircle = document.getElementById("sf-circle");
 const seeYouEl = document.getElementById("see-you");
 
 let isDragging = false;
-planeEl.addEventListener("mousedown", () => {
-  isDragging = true;
-  planeEl.style.cursor = "grabbing";
-});
-document.addEventListener("mouseup", () => { 
-  if(isDragging) {
-    isDragging = false; 
-    planeEl.style.cursor = "grab";
-    // When plane is near center of map, show confetti
-    const planeRect = planeEl.getBoundingClientRect();
-    const mapRect = mapContainer.getBoundingClientRect();
-    const mapCenterX = mapRect.left + mapRect.width/2;
-    const mapCenterY = mapRect.top + mapRect.height/2;
-    if(Math.abs(planeRect.left - mapCenterX) < 50 && Math.abs(planeRect.top - mapCenterY) < 50){
-      confettiEffect();
-      seeYouEl.classList.remove("hidden");
-    }
-  }
-});
-document.addEventListener("mousemove", (e) => {
+planeEl.addEventListener("mousedown", () => { isDragging = true; planeEl.style.cursor = "grabbing"; });
+document.addEventListener("mouseup", () => { isDragging = false; planeEl.style.cursor = "grab"; });
+document.addEventListener("mousemove", e => {
   if(!isDragging) return;
-  const rect = mapContainer.getBoundingClientRect();
+  const rect = journey.getBoundingClientRect();
   planeEl.style.left = (e.clientX - rect.left - 20) + "px";
   planeEl.style.top = (e.clientY - rect.top - 20) + "px";
+
+  // Detect if plane overlaps SF circle
+  const planeRect = planeEl.getBoundingClientRect();
+  const sfRect = sfCircle.getBoundingClientRect();
+  if(planeRect.left + planeRect.width/2 > sfRect.left &&
+     planeRect.left + planeRect.width/2 < sfRect.right &&
+     planeRect.top + planeRect.height/2 > sfRect.top &&
+     planeRect.top + planeRect.height/2 < sfRect.bottom){
+       seeYouEl.classList.remove("hidden");
+       confettiEffect();
+  }
 });
 
-// Confetti Effect
+// Confetti Effect (drop from top)
 function confettiEffect() {
-  for (let i = 0; i < 100; i++) {
+  for(let i=0;i<100;i++){
     const confetti = document.createElement("div");
     confetti.classList.add("confetti");
-    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.left = Math.random()*100 + "vw";
     confetti.style.color = ["#ff69b4","#ff1493","#ffd700","#00ffff"][Math.floor(Math.random()*4)];
+    confetti.innerText = "🎉";
     document.body.appendChild(confetti);
-    confetti.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(110vh)' }], { duration: 3000 + Math.random()*2000 });
-    setTimeout(() => confetti.remove(), 5000);
+    confetti.animate([{transform:'translateY(0)'},{transform:'translateY(110vh)'}],{duration:3000+Math.random()*2000});
+    setTimeout(()=>confetti.remove(),5000);
   }
 }
 
-// Slider Game
+// Slider Section
 const slider = document.getElementById("love-slider");
 const message = document.getElementById("love-slider-message");
-const universe = document.getElementById("universe-image");
 
 slider.addEventListener("input", () => {
-  if (parseInt(slider.value) >= 100) {
+  if(parseInt(slider.value)>=100){
     message.textContent = "MORE THAN THE UNIVERSE";
-    universe.classList.remove("hidden");
   } else {
     message.textContent = "NOT YET KEEP GOING HIGHER";
-    universe.classList.add("hidden");
   }
 });

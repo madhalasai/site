@@ -8,6 +8,9 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
+  <!-- Leaflet.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -36,29 +39,22 @@
     </div>
   </div>
 
-  <!-- Map & Plane Game -->
+  <!-- Map Section -->
   <section id="map-section">
     <h2 class="map-title">our journey ❤️</h2>
-    <div id="map-container">
-      <!-- Pink rectangle map -->
-      <svg id="us-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 959 593">
-        <rect width="959" height="593" fill="pink" stroke="black" stroke-width="5"/>
-        <!-- SF spot -->
-        <circle id="sf-spot" cx="150" cy="400" r="12" fill="transparent" stroke="red" stroke-width="3"/>
-        <text x="150" y="390" font-size="16" font-family="Comic Sans MS, cursive" fill="black" text-anchor="middle">SF</text>
-        <!-- NJ spot -->
-        <circle id="nj-spot" cx="650" cy="150" r="12" fill="transparent" stroke="black" stroke-width="3"/>
-        <text x="650" y="140" font-size="16" font-family="Comic Sans MS, cursive" fill="black" text-anchor="middle">NJ</text>
-      </svg>
+    <div id="map"></div>
 
-      <!-- Plane starting in NJ -->
-      <div id="plane">
-        ✈️
-        <div class="drag-label">drag me</div>
-      </div>
+    <!-- Plane starting in NJ -->
+    <div id="plane">
+      ✈️
+      <div class="drag-label">drag me</div>
     </div>
+
     <p id="see-you" class="hidden">See you soon! 🎉</p>
   </section>
+
+  <!-- Leaflet.js JS -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 
   <!-- Script -->
   <script src="script.js" defer></script>

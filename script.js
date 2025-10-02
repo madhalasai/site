@@ -1,98 +1,99 @@
-document.addEventListener("DOMContentLoaded", () => {
+
+// =============================
+// Floating Hearts
+// =============================
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerText = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 5000);
+}
+setInterval(createHeart, 800);
+
+// =============================
+// Floating Pandas
+// =============================
+function createPanda() {
+  const panda = document.createElement("div");
+  panda.classList.add("panda");
+  panda.innerText = "🐼";
+  panda.style.left = Math.random() * 100 + "vw";
+  panda.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(panda);
+
+  setTimeout(() => panda.remove(), 8000);
+}
+setInterval(createPanda, 2000);
+
+// =============================
+// Letter Modal
+// =============================
 const openBtn = document.getElementById("open-letter");
 const modal = document.getElementById("modal");
 const closeBtn = document.getElementById("close-modal");
 
-// open modal
 openBtn.addEventListener("click", () => {
-modal.classList.remove("hidden");
+  modal.classList.remove("hidden");
 });
-
-// close modal
 closeBtn.addEventListener("click", () => {
-modal.classList.add("hidden");
+  modal.classList.add("hidden");
 });
 
-// floating hearts + pandas
-const layer = document.getElementById("animation-layer");
-const emojis = ["❤️", "💕", "🐼", "💖", "💓", "🐼"];
+// =============================
+// Plane Drag Game
+// =============================
+const planeEl = document.getElementById("plane");
+const mapEl = document.getElementById("map-container");
+const seeYouEl = document.getElementById("see-you");
+const sfSpot = document.getElementById("sf-spot");
 
-function createFloating() {
-const span = document.createElement("span");
-span.classList.add("floating");
-span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-span.style.left = Math.random() * 100 + "vw";
-span.style.fontSize = (Math.random() * 24 + 20) + "px";
-span.style.animationDuration = (5 + Math.random() * 5) + "s";
-layer.appendChild(span);
+let isDragging = false;
 
-```
-// remove after animation
-setTimeout(() => {
-  span.remove();
-}, 10000);
-```
-
-}
-
-setInterval(createFloating, 800);
-});
-// plane drag + drop to SF
-const plane = document.getElementById("plane");
-const mapContainer = document.getElementById("map-container");
-const destination = document.getElementById("destination");
-const seeYou = document.getElementById("see-you");
-
-let offsetX, offsetY;
-
-plane.addEventListener("dragstart", (e) => {
-  offsetX = e.offsetX;
-  offsetY = e.offsetY;
+planeEl.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  planeEl.style.cursor = "grabbing";
 });
 
-mapContainer.addEventListener("dragover", (e) => {
-  e.preventDefault();
-});
+document.addEventListener("mouseup", () => {
+  if (isDragging) {
+    isDragging = false;
+    planeEl.style.cursor = "grab";
 
-mapContainer.addEventListener("drop", (e) => {
-  e.preventDefault();
-  const rect = mapContainer.getBoundingClientRect();
-  const x = e.clientX - rect.left - offsetX;
-  const y = e.clientY - rect.top - offsetY;
-
-  // Move plane
-  plane.style.left = x + "px";
-  plane.style.top = y + "px";
-
-  // Check if close to SF spot
-  const sfX = rect.width * 0.1;   // SF ~ left side
-  const sfY = rect.height * 0.75; // lower area
-  if (Math.abs(x - sfX) < 60 && Math.abs(y - sfY) < 60) {
-    destination.style.background = "red";
-    confettiEffect();
-    seeYou.classList.remove("hidden");
+    // check if near SF spot
+    const planeRect = planeEl.getBoundingClientRect();
+    const sfRect = sfSpot.getBoundingClientRect();
+    if (Math.abs(planeRect.x - sfRect.x) < 50 && Math.abs(planeRect.y - sfRect.y) < 50) {
+      sfSpot.setAttribute("fill", "red");
+      confettiEffect();
+      seeYouEl.classList.remove("hidden");
+    }
   }
 });
 
-// Simple confetti effect
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    const rect = mapEl.getBoundingClientRect();
+    planeEl.style.left = (e.clientX - rect.left - 20) + "px";
+    planeEl.style.top = (e.clientY - rect.top - 20) + "px";
+  }
+});
+
+// =============================
+// Confetti Effect
+// =============================
 function confettiEffect() {
   for (let i = 0; i < 100; i++) {
-    const conf = document.createElement("div");
-    conf.innerText = "🎊";
-    conf.style.position = "absolute";
-    conf.style.left = Math.random() * 100 + "vw";
-    conf.style.top = "-10px";
-    conf.style.fontSize = "20px";
-    conf.style.animation = `fall ${3 + Math.random()*2}s linear forwards`;
-    document.body.appendChild(conf);
-    setTimeout(() => conf.remove(), 5000);
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.backgroundColor = ["#ff69b4", "#ff1493", "#ffd700", "#00ffff"][Math.floor(Math.random() * 4)];
+    confetti.style.animationDuration = (2 + Math.random() * 3) + "s";
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 5000);
   }
 }
-
-// confetti animation
-const style = document.createElement("style");
-style.textContent = `
-@keyframes fall {
-  to { transform: translateY(110vh); opacity: 0; }
-}`;
-document.head.appendChild(style);

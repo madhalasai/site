@@ -135,4 +135,72 @@ to   { transform: translateY(-10vh) scale(1.5); opacity: 0; }
 .hidden {
   display: none;
 }
+/* Animated heading */
+.animated-heading {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.8rem;
+  background: linear-gradient(to right, #ff0080, #7928ca);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: typewriter 4s steps(40, end), blink 1s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #fff;
+  display: inline-block;
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Map Section Styling */
+#map-section {
+  margin-top: 60px;
+  padding: 20px;
+  background: black;
+  border-top: 3px solid #fff;
+}
+
+.map-title {
+  font-size: 1.8rem;
+  color: #ffb6c1;
+  margin-bottom: 15px;
+}
+
+#map-container {
+  position: relative;
+  display: inline-block;
+  max-width: 600px;
+  width: 90%;
+}
+
+#us-map {
+  width: 100%;
+  border-radius: 10px;
+}
+
+#plane {
+  position: absolute;
+  top: 200px; /* roughly NJ spot */
+  left: 400px;
+  font-size: 2rem;
+  cursor: grab;
+  text-align: center;
+}
+
+.drag-label {
+  font-size: 0.7rem;
+  color: red;
+}
+
+#see-you {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #ffb6c1;
+  font-weight: bold;
+}
+.hidden { display: none; }
 

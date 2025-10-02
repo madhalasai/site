@@ -1,67 +1,64 @@
+```html
 <!doctype html>
-
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>happy boyfriend day — aaru bebe</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- floating hearts + pandas -->
   <div id="animation-layer" aria-hidden="true"></div>
-
-  <!-- main heading -->
 
   <header class="hero">
     <h1 id="main-heading" class="animated-heading">happy boyfriend day and happy one year</h1>
     <p id="sub-heading">aaru bebe ❤️</p>
-
   </header>
 
-  <!-- open letter button -->
+  <!-- Button to open love letter -->
+  <button id="open-letter" class="cta" aria-haspopup="dialog" aria-controls="modal">Open Letter</button>
 
-<button id="open-letter" class="cta">Open Letter</button>
-
-  <!-- modal for letter -->
-
-  <div id="modal" class="modal hidden">
+  <!-- Modal for the letter -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-content">
-      <button id="close-modal" class="close">×</button>
-      <h2>A Letter for you</h2>
+      <button id="close-modal" class="close" aria-label="Close letter">×</button>
+      <h2 id="modal-title">A Letter for you</h2>
       <p id="letter">
         i love u jaanu. i'm not good at this at all but i'm learning so i can give my love the proper appreciation and love you deserve. 
         you make me so happy my dudu. ur right, we will work it out we will figure it out but i want u to know that to me u are everythign and more. 
-        i'm so excited to see you. hope u enjoyed this!!
+        i'm so excited to see you. hope u enjoyed this!!<br><br>
+        ps: you are my safe place, my sunshine, my favorite everything. thank you for being the best boyfriend ever. ❤️
       </p>
     </div>
   </div>
 
-  <!-- script must be last -->
+  <!-- Map & Plane Game -->
+  <section id="map-section">
+    <h2 class="map-title">our journey ❤️</h2>
+    <div id="map-container">
+      <!-- Simple placeholder US map (pink background, SF marked) -->
+      <svg id="us-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 959 593">
+        <rect width="959" height="593" fill="pink" stroke="black" stroke-width="5"/>
+        <circle id="sf-spot" cx="150" cy="400" r="12" fill="transparent" stroke="red" stroke-width="3"/>
+      </svg>
 
-  <script src="script.js" defer></script>
-
-  <!-- US Map Section -->
-<section id="map-section">
-  <h2 class="map-title">our journey ❤️</h2>
-  <div id="map-container">
-    <!-- embedded simple US map -->
-    <svg id="us-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 959 593">
-      <rect width="959" height="593" fill="pink" stroke="black" stroke-width="5"/>
-      <!-- just a placeholder rectangle map -->
-      <circle id="sf-spot" cx="150" cy="400" r="12" fill="transparent" stroke="red" stroke-width="3"/>
-    </svg>
-
-    <div id="plane">
-      ✈️
-      <div class="drag-label">drag me</div>
+      <!-- Plane starting in NJ -->
+      <div id="plane">
+        ✈️
+        <div class="drag-label">drag me</div>
+      </div>
     </div>
-  </div>
-  <p id="see-you" class="hidden">See you soon! 🎉</p>
-</section>
+    <p id="see-you" class="hidden">See you soon! 🎉</p>
+  </section>
 
-
+  <!-- Script -->
+  <script src="script.js" defer></script>
 </body>
 </html>
+```

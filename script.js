@@ -40,9 +40,23 @@ planeEl.addEventListener("mousedown", () => {
   isDragging = true;
   planeEl.style.cursor = "grabbing";
 });
-document.addEventListener("mouseup", () => { isDragging = false; planeEl.style.cursor = "grab"; });
+document.addEventListener("mouseup", () => { 
+  if(isDragging) {
+    isDragging = false; 
+    planeEl.style.cursor = "grab";
+    // When plane is near center of map, show confetti
+    const planeRect = planeEl.getBoundingClientRect();
+    const mapRect = mapContainer.getBoundingClientRect();
+    const mapCenterX = mapRect.left + mapRect.width/2;
+    const mapCenterY = mapRect.top + mapRect.height/2;
+    if(Math.abs(planeRect.left - mapCenterX) < 50 && Math.abs(planeRect.top - mapCenterY) < 50){
+      confettiEffect();
+      seeYouEl.classList.remove("hidden");
+    }
+  }
+});
 document.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
+  if(!isDragging) return;
   const rect = mapContainer.getBoundingClientRect();
   planeEl.style.left = (e.clientX - rect.left - 20) + "px";
   planeEl.style.top = (e.clientY - rect.top - 20) + "px";

@@ -98,28 +98,29 @@ body {
   margin-bottom: 15px;
 }
 
-/* Leaflet Map */
-#map {
+#map-container {
+  position: relative;
+  display: inline-block;
   width: 90%;
   max-width: 600px;
-  height: 400px;
-  margin: 0 auto;
-  border: 5px solid black;
+}
+
+#us-map {
+  width: 100%;
   border-radius: 10px;
-  z-index: 1;
-  position: relative;
+  border: 5px solid black;
 }
 
 /* Plane */
 #plane {
   position: absolute;
-  top: 150px; /* NJ start */
-  left: 650px;
+  bottom: 10px;
+  left: 50px;
   font-size: 2rem;
   cursor: grab;
-  text-align: center;
   z-index: 10;
 }
+
 .drag-label {
   font-size: 0.7rem;
   color: red;
@@ -156,4 +157,28 @@ body {
   font-size: 20px;
   pointer-events: none;
   z-index: 1000;
+}
+
+/* Love Slider Section */
+#love-slider-section {
+  margin-top: 40px;
+  padding: 20px;
+  background: #fff;
+  border-top: 3px solid black;
+}
+
+#love-slider {
+  width: 80%;
+  margin: 15px 0;
+}
+
+#love-slider-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#universe-image {
+  width: 200px;
+  margin-top: 10px;
+  border-radius: 10px;
 }

@@ -29,11 +29,12 @@ const closeBtn = document.getElementById("close-modal");
 openBtn.addEventListener("click", () => modal.classList.remove("hidden"));
 closeBtn.addEventListener("click", () => modal.classList.add("hidden"));
 
-// Plane Drag + Snap
+// Plane Drag + Snap + Confetti + Circular Text
 const planeEl = document.getElementById("plane");
 const journey = document.getElementById("journey-container");
 const sfCircle = document.getElementById("sf-circle");
 const seeYouEl = document.getElementById("see-you");
+const circleText = document.getElementById("circle-text");
 
 let isDragging = false;
 
@@ -42,33 +43,27 @@ planeEl.addEventListener("mousedown", e => {
   planeEl.style.cursor = "grabbing";
   e.preventDefault();
 });
-
 document.addEventListener("mouseup", () => {
-  if(isDragging) {
-    isDragging = false;
-    planeEl.style.cursor = "grab";
+  if(isDragging){
+    isDragging=false;
+    planeEl.style.cursor="grab";
     checkPlaneOverSF();
   }
 });
-
 document.addEventListener("mousemove", e => {
   if(!isDragging) return;
   const rect = journey.getBoundingClientRect();
   let x = e.clientX - rect.left - planeEl.offsetWidth/2;
   let y = e.clientY - rect.top - planeEl.offsetHeight/2;
-
-  x = Math.max(0, Math.min(rect.width - planeEl.offsetWidth, x));
-  y = Math.max(0, Math.min(rect.height - planeEl.offsetHeight, y));
-
-  planeEl.style.left = x + "px";
-  planeEl.style.top = y + "px";
+  x=Math.max(0,Math.min(rect.width-planeEl.offsetWidth,x));
+  y=Math.max(0,Math.min(rect.height-planeEl.offsetHeight,y));
+  planeEl.style.left=x+"px";
+  planeEl.style.top=y+"px";
 });
 
-// Snap into SF circle if near
 function checkPlaneOverSF(){
   const planeRect = planeEl.getBoundingClientRect();
   const sfRect = sfCircle.getBoundingClientRect();
-
   const centerX = planeRect.left + planeRect.width/2;
   const centerY = planeRect.top + planeRect.height/2;
 
@@ -76,25 +71,27 @@ function checkPlaneOverSF(){
      centerX < sfRect.right+20 &&
      centerY > sfRect.top-20 &&
      centerY < sfRect.bottom+20){
-       // snap plane to SF center
+       // Snap
        planeEl.style.left = (sfCircle.offsetLeft + sfCircle.offsetWidth/2 - planeEl.offsetWidth/2) + "px";
        planeEl.style.top = (sfCircle.offsetTop + sfCircle.offsetHeight/2 - planeEl.offsetHeight/2) + "px";
        seeYouEl.classList.remove("hidden");
+       circleText.style.display = "block";
        confettiEffect();
   }
 }
 
-// Confetti drop
+// Confetti across screen
 function confettiEffect(){
-  for(let i=0;i<100;i++){
-    const confetti = document.createElement("div");
+  for(let i=0;i<150;i++){
+    const confetti=document.createElement("div");
     confetti.classList.add("confetti");
-    confetti.style.left = Math.random()*100 + "vw";
-    confetti.style.color = ["#ff69b4","#ff1493","#ffd700","#00ffff"][Math.floor(Math.random()*4)];
-    confetti.innerText = "🎉";
+    confetti.style.left=Math.random()*100+"vw";
+    confetti.style.color=["#ff69b4","#ff1493","#ffd700","#00ffff"][Math.floor(Math.random()*4)];
+    confetti.innerText="🎉";
     document.body.appendChild(confetti);
-    confetti.animate([{transform:'translateY(0)'},{transform:'translateY(110vh)'}],
-                     {duration:3000+Math.random()*2000});
+    confetti.animate([{transform:'translateY(0) rotate(0deg)'},
+                      {transform:'translateY(110vh) rotate('+ (Math.random()*360) +'deg)'}],
+                     {duration:3000+Math.random()*3000});
     setTimeout(()=>confetti.remove(),5000);
   }
 }
@@ -102,11 +99,7 @@ function confettiEffect(){
 // Slider Section
 const slider = document.getElementById("love-slider");
 const message = document.getElementById("love-slider-message");
-
 slider.addEventListener("input", () => {
-  if(parseInt(slider.value)>=100){
-    message.textContent = "MORE THAN THE UNIVERSE";
-  } else {
-    message.textContent = "NOT YET KEEP GOING HIGHER";
-  }
+  if(parseInt(slider.value)>=100){ message.textContent="MORE THAN THE UNIVERSE"; }
+  else{ message.textContent="NOT YET KEEP GOING HIGHER"; }
 });

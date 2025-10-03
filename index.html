@@ -15,10 +15,8 @@
     <p id="sub-heading">aaru bebe ❤️</p>
   </header>
 
-  <!-- Button to open love letter -->
   <button id="open-letter" class="cta">Open Letter</button>
 
-  <!-- Modal for the letter -->
   <div id="modal" class="modal hidden">
     <div class="modal-content">
       <button id="close-modal" class="close">×</button>
@@ -47,8 +45,15 @@
         <div class="drag-label">drag me</div>
       </div>
       <div id="sf-circle">SF</div>
+      <svg id="circle-text" width="100%" height="100%">
+        <path id="circlePath" d="M 50 150 A 100 100 0 1 1 450 150" fill="none"/>
+        <text fill="#ff0080" font-size="24" font-weight="bold">
+          <textPath href="#circlePath" startOffset="50%" text-anchor="middle">
+            YAS see you soon! ✨
+          </textPath>
+        </text>
+      </svg>
     </div>
-    <p id="see-you" class="hidden">See you soon! 🎉</p>
   </section>
 
   <!-- Slider Section -->

@@ -10,11 +10,7 @@ body {
 .hero {
   padding: 60px 20px 20px;
 }
-
-#sub-heading {
-  font-size: 1.3rem;
-  color: black;
-}
+#sub-heading { font-size: 1.3rem; color: black; }
 
 .animated-heading {
   font-size: 2.8rem;
@@ -83,7 +79,7 @@ body {
   background:#ffc0cb;
   border-radius:10px;
   border:3px solid black;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #plane {
@@ -92,7 +88,7 @@ body {
   left:20px;
   font-size:2rem;
   cursor:grab;
-  transition: left 0.5s ease, top 0.5s ease; /* snapping animation */
+  transition: left 0.8s ease, top 0.8s ease;
 }
 .drag-label { font-size:0.7rem; color:red; }
 
@@ -139,15 +135,15 @@ body {
   background:pink;
   border-top:3px solid black;
 }
-#love-slider {
-  width:80%;
-  margin:15px 0;
-  cursor:pointer;
-  accent-color:red;
-}
-#love-slider-message {
-  font-size:1.2rem;
-  font-weight:bold;
-  animation: bounce 1s infinite alternate;
-}
+#love-slider { width:80%; margin:15px 0; cursor:pointer; accent-color:red; }
+#love-slider-message { font-size:1.2rem; font-weight:bold; animation: bounce 1s infinite alternate; }
 @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+
+/* Circular Text SVG */
+#circle-text {
+  position:absolute;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+#circlePath { fill:none; }
